@@ -1,5 +1,6 @@
 import axios from 'axios'
-const url = '/api/auth'
+const apiBaseUrl = process.env.REACT_APP_API_URL || '/api'
+const url = `${apiBaseUrl}/auth`
 
 let token = null
 

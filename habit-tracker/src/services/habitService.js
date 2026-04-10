@@ -1,7 +1,8 @@
 import axios from 'axios'
 import authService from './authService'
 
-const url = '/api/habits'
+const apiBaseUrl = process.env.REACT_APP_API_URL || '/api'
+const url = `${apiBaseUrl}/habits`
 
 const getAll = async () => {
   const config = { headers: { Authorization: authService.getToken() } }
