@@ -80,11 +80,6 @@ const App = (props) => {
     <Container fluid>
       {props.auth === null ? loginView() : homeView()}
       <Divider hidden />
-      <Container>
-        <Segment color='purple'>
-          <h6>Developed by otsha / <a href='https://github.com/otsha/habit-tracker'>GitHub Repository</a> / <a href='https://github.com/otsha/habit-tracker/blob/master/LICENSE'>GNU GPL 3.0</a></h6>
-        </Segment>
-      </Container>
     </Container>
   )
 }
