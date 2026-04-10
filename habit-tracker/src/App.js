@@ -10,13 +10,14 @@ import HabitDataList from './components/HabitDataList'
 import Notification from './components/Notification'
 
 const App = (props) => {
+  const { auth, autoLogin, logout } = props
 
   useEffect(() => {
     const storedUser = JSON.parse(window.localStorage.getItem('user'))
     if (storedUser && storedUser.token) {
-      props.autoLogin(storedUser)
+      autoLogin(storedUser)
     }
-  }, [])
+  }, [autoLogin])
 
   const loginView = () => {
     return (
@@ -51,10 +52,10 @@ const App = (props) => {
             <Icon name='tasks' />
             Habit Tracker
           </Menu.Item>
-          <Menu.Item name='loggedInUser'>Logged in as {props.auth.username}</Menu.Item>
+          <Menu.Item name='loggedInUser'>Logged in as {auth.username}</Menu.Item>
           <Menu.Item name='demo'>FOR DEMONSTRATION PURPOSES ONLY</Menu.Item>
           <Menu.Item position='right' name='logout'>
-            <Button animated onClick={props.logout}>
+            <Button animated onClick={logout}>
               <Button.Content hidden>Log Out</Button.Content>
               <Button.Content visible><Icon name='log out' /></Button.Content>
             </Button>
@@ -78,7 +79,7 @@ const App = (props) => {
 
   return (
     <Container fluid>
-      {props.auth === null ? loginView() : homeView()}
+      {auth === null ? loginView() : homeView()}
       <Divider hidden />
     </Container>
   )

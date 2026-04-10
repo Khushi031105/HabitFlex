@@ -13,19 +13,20 @@ for (let i = 1; i <= 31; i++) {
 }
 
 const MonthView = (props) => {
+  const { display, habits, changeDisplayMonth, initHabits, initDates } = props
 
   useEffect(() => {
-    props.initHabits()
-  }, [])
+    initHabits()
+  }, [initHabits])
 
   useEffect(() => {
-    props.initDates()
-  }, [])
+    initDates()
+  }, [initDates])
 
   return (
     <Container>
-      <h2>{`${props.display.displayMonthName} (${props.display.displayMonth + 1}/${props.display.displayYear})`}</h2>
-      {props.display.displayMonth === props.display.currentDate.getMonth()
+      <h2>{`${display.displayMonthName} (${display.displayMonth + 1}/${display.displayYear})`}</h2>
+      {display.displayMonth === display.currentDate.getMonth()
         ? <Label color="teal">Current Month</Label>
         : <></>
       }
@@ -35,23 +36,23 @@ const MonthView = (props) => {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Habit</Table.HeaderCell>
-              {headers.slice(0, props.display.displayMonthLength).map(header => header)}
+              {headers.slice(0, display.displayMonthLength).map(header => header)}
               <Table.HeaderCell>Delete</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {props.habits.map(h => <Habit key={h.name} habit={h} />)}
+            {habits.map(h => <Habit key={h.name} habit={h} />)}
           </Table.Body>
         </Table>
       </Container>
       <Divider hidden />
-      <Button icon labelPosition='left' onClick={() => props.changeDisplayMonth(props.display.displayMonth - 1)}>
+      <Button icon labelPosition='left' onClick={() => changeDisplayMonth(display.displayMonth - 1)}>
         <Icon name='angle left' />
         <Button.Content>
           Previous Month
         </Button.Content>
       </Button>
-      <Button icon labelPosition='right' onClick={() => props.changeDisplayMonth(props.display.displayMonth + 1)}>
+      <Button icon labelPosition='right' onClick={() => changeDisplayMonth(display.displayMonth + 1)}>
         <Icon name='angle right' />
         <Button.Content>
           Next Month
